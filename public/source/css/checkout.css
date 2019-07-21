@@ -1,0 +1,122 @@
+.checkout .d-flex {
+    display: flex;
+    flex-direction: row;
+    background: #f6f6f6;
+    border-radius: 0 0 5px 5px;
+    padding: 25px;
+}
+.checkout .form-info {
+    flex: 4;
+}
+.checkout .Yorder {
+    flex: 2;
+}
+.checkout .title {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right bottom,
+        color-stop(0, #5195a8),
+        color-stop(100, #70eaff)
+    );
+    background: -moz-linear-gradient(top left, #5195a8 0%, #70eaff 100%);
+    background: -ms-linear-gradient(top left, #5195a8 0%, #70eaff 100%);
+    background: -o-linear-gradient(top left, #5195a8 0%, #70eaff 100%);
+    background: linear-gradient(to bottom right, #5195a8 0%, #70eaff 100%);
+    border-radius: 5px 5px 0 0;
+    padding: 1rem;
+    color: #f6f6f6;
+    text-align: center;
+}
+.checkout .title h2 {
+    font-size: 2.4rem;
+    margin: 0;
+    padding-left: 15px;
+}
+.checkout .required {
+    color: red;
+}
+.checkout label,
+.checkout table {
+    display: block;
+    margin: 15px;
+}
+.checkout label > span {
+    float: left;
+    width: 25%;
+    padding-right: 10px;
+}
+.checkout input[type="text"],
+.checkout input[type="tel"],
+input[type="email"],
+select {
+    width: 70%;
+    height: 30px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    color: #888;
+}
+.checkout select {
+    width: 72%;
+    height: 45px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+.checkout .Yorder {
+    margin-top: 15px;
+    padding: 0 20px 20px;
+    border: 1px solid #dadada;
+}
+.checkout table {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+}
+tbody {
+    width: 100%;
+    display: table;
+}
+.checkout th {
+    border-bottom: 1px solid #dadada;
+    padding: 10px 0;
+}
+.checkout tr > td:nth-child(1) {
+    text-align: left;
+    color: #2d2d2a;
+}
+.checkout tr > td:nth-child(2) {
+    text-align: right;
+    color: #52ad9c;
+}
+.checkout td {
+    padding: 1rem;
+}
+.checkout tr {
+    border-bottom: 1px solid #dadada;
+}
+
+.checkout p {
+    display: block;
+    color: #888;
+    margin: 0;
+    padding-left: 25px;
+}
+.checkout .Yorder > div {
+    padding: 15px 0;
+}
+
+.checkout button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background: #52ad9c;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+.checkout button:hover {
+    background: #428a7d;
+}
