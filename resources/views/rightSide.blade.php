@@ -10,7 +10,7 @@
             <div class="grid__head-quick-seen mb-3"><strong class="upp">Tìm kiếm</strong><i class="icon-x1" data-toggle="gparent"></i></div> 
             <input type="text" placeholder="Nhập sản phẩm cần tìm...">
         </form>
-        <form class="cart" id="cart">
+        <form id="cart">
             <div class="grid__head-quick-seen mb-5"><strong class="upp">Giỏ hàng</strong><i class="icon-x1" data-toggle="gparent"></i></div> 
             <div class="cart__list">    
                 <div class="cart__product grid mb-3">

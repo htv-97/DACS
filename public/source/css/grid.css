@@ -48,8 +48,6 @@ section{
 /* start grid body */
     [class*='grid']{
         display: grid;
-        width:100%;
-        justify-items: center;
 
     }
     [class*="container"]{
@@ -148,7 +146,7 @@ section{
     width:300px;
     display:none;
 }
-.cart{
+.extension{
     overflow: auto;
     height: 100vh;
 
