@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-<link rel="stylesheet" href="{{url::asset('source/css/checkout.css')}}">
+<link rel="stylesheet" href="{{URL::asset('source/css/checkout.css')}}">
     
 <section class="checkout">
     <div class="title">

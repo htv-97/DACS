@@ -32,7 +32,7 @@
             </div>
             <div class="cart__wrapper grid">
                 <button type='submit' class="btn upp btn-update">CẬP NHẬT</button>
-                <a href="#" class="btn upp btn-checkout">THANH TOÁN</a>
+                <a href="{{route('checkout')}}" class="btn upp btn-checkout">THANH TOÁN</a>
             </div>
         </div>
     </section>

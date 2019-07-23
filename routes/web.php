@@ -43,7 +43,7 @@ Route::get('login',[
     'as' => 'login-signup',
     'uses' => 'PageController@getPopup'
 ]);
-Route::get('checkout',[
+Route::get('/checkout',[
     'as' => 'checkout',
     'uses' => 'PageController@getCheckout'
 ]);
