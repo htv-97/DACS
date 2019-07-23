@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-<link rel="stylesheet" href="./source/css/signup-login.css">
+<link rel="stylesheet" href="{{url::asset('source/css/signup-login.css')}}">
     
     <section class="user">
         <div class="user_options-container">
@@ -41,14 +41,19 @@
             <form class="forms_form">
                 <fieldset class="forms_fieldset">
                 <div class="forms_field">
-                    <input type="text" placeholder="Họ và tên" class="forms_field-input" required />
+                    <input type="text" name='fname' placeholder="Họ và tên" class="forms_field-input" required />
                 </div>
                 <div class="forms_field">
-                    <input type="email" placeholder="Email" class="forms_field-input" required />
+                    <input type="email" name='email' placeholder="Email" class="forms_field-input" required />
                 </div>
                 <div class="forms_field">
-                    <input type="password" placeholder="Mật khẩu" class="forms_field-input" required />
+                    <input type="password" name='pass' placeholder="Mật khẩu" class="forms_field-input" required />
                 </div>
+                <div class="forms_field">
+                    <label><input type="radio" name="gender" value='Nam' checked>Nam</label>
+                    <label><input type="radio" name="gender" value='Nữ'>Nữ</label>
+                </div>
+    
                 </fieldset>
                 <div class="forms_buttons">
                 <input type="submit" value="Đăng ký" class="forms_buttons-action">

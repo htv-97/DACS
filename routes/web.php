@@ -16,28 +16,38 @@
 // });
 // Route::get('home', 'HomeController@homeDemo');
 // Route::get('home/{id}', 'HomeController@homeVariable');
-
+Route::any('source/image/product/{image}',[
+    'as' => 'image'
+]);
 Route::get('/',[
-    'name'=>'index-page',
+    'as'=>'index-page',
     'uses'=>'PageController@getIndex'
 ]);
-Route::get('product-type',[
-    'name' => 'productType',
+Route::get('category/{productType}',[
+    'as' => 'productType',
     'uses' => 'PageController@getProductType'
 ]);
-Route::get('product-detail',[
-    'name' => 'productDetail',
+Route::get('product/{productName}',[
+    'as' => 'productDetail',
     'uses' => 'PageController@getProductDetail'
 ]);
+Route::get('news/{newsTitle}',[
+    'as' => 'news',
+    'uses' => 'PageController@getNews'
+]);
 Route::get('cart',[
-    'name' => 'shoppingCart',
+    'as' => 'shoppingCart',
     'uses' => 'PageController@getShoppingCart'
 ]);
 Route::get('login',[
-    'name' => 'login-signup',
+    'as' => 'login-signup',
     'uses' => 'PageController@getPopup'
 ]);
 Route::get('checkout',[
-    'name' => 'checkout',
+    'as' => 'checkout',
     'uses' => 'PageController@getCheckout'
+]);
+Route::get('add-to-cart/{id}', [
+    'as' =>'addToCart',
+    'uses' => 'PageController@getAddToCart'
 ]);

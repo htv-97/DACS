@@ -1,20 +1,35 @@
 @extends('master')
 @section('content')
-    <div class="flex--between-center w-100 border--bottom">
-        <div class="redirect-trees">
-            <a href="./">Trang chủ</a>
-            <a href="./product-type">Đầm</a>
-            <a href="#">Đầm xanh váy xòe</a>
-        </div>
-    </div>  
+<?php
+    use App\Product;
+    use App\ProductType; 
+    $productType = ProductType::where('id', '=', $product->id_type)->firstOrFail();
+    $productsRelated = Product::where('id_type','=',$product->id_type)->inRandomOrder()->take(5)->get();
+?>
+    <div class="header-archive">
+        <h1 class="title">{{$product->name}}</h1>
+        <div class="flex--between-center w-95 border--bottom px-1">
+            <div class="redirect-trees">
+                <a href="{{URL::asset('./')}}">Trang chủ</a>
+                <a href="{{ URL::asset('/category/'.$productType->name)}}">{{$productType->name}}</a>
+                <a href="#">{{$product->name}}</a>
+            </div>
+        </div>                
+    </div>
+
     <!-- show product               -->
     <section>
         <article class="product__show grid">
-            <img src="./source/img/product-dress/YuooMuoo-New-2017-European-Style-V-neck-Elegant-Women-Autumn-Dress-Fashion-Shine-Green-Knitted-Dress.jpg_640x640.jpg" alt="">
+        <img src="{{route('image',$product->image)}}" alt="">
             <form  method="GET" class="product__show--details grid">
                 <div class="product__show--head">
-                    <h2 class="title mb-1">Quần Chino</h2>
-                    <span class="price--huge">300.000</span>
+                    <h2 class="title mb-1">{{$product->name}}</h2>
+                    @if(empty($product->promotion_price))
+                        <span class="price--huge">{{$product->unit_price}}</span>
+                    @else
+                        <span class="price--huge">{{$product->promotion_price}}</span>
+                        <span class="price__sale">{{$product->unit_price}}</span>
+                    @endif
                 </div>
                 <div class="product__show--size">
                     <h3 class="upp">Kích thước</h3>
@@ -28,7 +43,7 @@
                     <h3 class="upp">số lượng</h3>
                     <div class="product__quantity minus">-</div><input type="number" name="product-quantity" id="" min="0" value="1" class="product__quantity"><div class="product__quantity plus">+</div>
                 </div>
-                <button type="submit" class="btn upp">Thêm vào giỏ hàng</button>
+                <a href="{{route('addToCart',$product->id)}}" type="submit" class="btn upp">Thêm vào giỏ hàng</a>
                 <div>
                     <a href="#" class="icon-heart1"></a><small> Thêm vào danh sách yêu thích</small>
                 </div>
@@ -94,20 +109,27 @@
     </section>
     <section >
             <h2 class="title">sản phẩm tương tự</h2>
-            <a class="see-more">Xem thêm</a>   
+            <a href="{{ route('productType',$productType->name)}}" class="see-more">Xem thêm</a>   
             <div class="owl-carousel-3 show__arr">
-                <article class="card card__product">
-                    <span class="sales">-40%</span>
-                    <a href="./source/html/product.html"><img src="./source/img/product-dress/11525683977921-Navy-Blue--Green-Embroidered-yoke-cape-design-Maxi-2971525683977801-1.jpg" alt=""></a>
-                    <div class="card__content">
-                        <h3 class="card__title">Đầm knot đen màu trơn công sở</h3>
-                        <div class="card__prices">
-                            <span>300.000</span>
-                            <span>500.000</span>
-                            <i class="icon-heart1"></i>
+                @foreach ($productsRelated as $item)
+                    
+                    <article class="card card__product">
+                        @if(!empty($item->promotion_price))
+                            <span class="sales">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
+                        @endif
+                        <a href="{{route('productDetail',$item->name)}}"><img src="{{URL::asset('source/image/product/'.$item->image)}}" alt=""></a>
+                        <div class="card__content">
+                        <h3 class="card__title">{{$item->name}}</h3>
+                            <div class="card__prices">
+                            @if(!empty($item->promotion_price))
+                                <span>{{$item->promotion_price}}</span>
+                            @endif
+                                <span>{{$item->unit_price}}</span>
+                                <i class="icon-heart1"></i>
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                @endforeach
             </div>
         </section>
     
