@@ -2,7 +2,6 @@
 
 namespace App;
 
-// use Illuminate\Database\Eloquent\Model;
 
 class Cart
 {
@@ -16,36 +15,65 @@ class Cart
             $this->totalQty = $oldCart->totalQty;
             $this->totalPrice = $oldCart->totalPrice;
         }
+
     }
 
-    public function add($item, $id){
-        $giohang = ['qty'=>0, 'price' => $item->unit_price, 'item' => $item];
-            if($this->items){
+    public function add($item, $qty,$id){
+        $price = ($item->unit_price >=  $item->promotion_price && $item->promotion_price !== null) 
+                    ?  $item ->promotion_price :  $item ->unit_price;
+        // $pricePromotion = $item ->promotion_price; 
+        // $priceItem = (($pricePromotion < $priceUnit) && $pricePromotion !== null) ? $pricePromotion : $priceUnit;
+        $giohang = ['qty'=>0, 'price' =>$price, 'item' => $item,'priceItem'=>$price];
+
+        if($this->items){
             if(array_key_exists($id, $this->items)){
-            $giohang = $this->items[$id];
+                $giohang = $this->items[$id];
+            }
+        }
+
+        $giohang['qty'] += $qty;
+        $giohang['price'] = $price * $giohang['qty'];
+        $this->items[$id] = $giohang;
+        $this->totalQty += $qty;
+        $this->totalPrice += $price * $qty;
+        // dd($item ->promotion_price,$item->unit_price,
+        // $item->unit_price >=  $item->promotion_price,$price,$this);
+    }
+    public function reduceByOne($id){
+        if($this->items[$id]){
+            $this->items[$id]['qty']--;
+            $this->items[$id]['price'] -= $this->items[$id]['priceItem'];
+            $this->totalQty--;
+            $this->totalPrice -= $this->items[$id]['priceItem'];
+            if($this->items[$id]['qty']<=0){
+                unset($this->items[$id]);
+            }
         }
     }
-        $giohang['qty']++;
-        $giohang['price'] = $item->unit_price * $giohang['qty'];
-        $this->items[$id] = $giohang;
-        $this->totalQty++;
-        $this->totalPrice += $item->unit_price;
-    }
-    //xóa 1
-    public function reduceByOne($id){
-        $this->items[$id]['qty']--;
-        $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
-        $this->totalQty--;
-        $this->totalPrice -= $this->items[$id]['item']['price'];
-
-        if($this->items[$id]['qty']<=0){
-            unset($this->items[$id]);
+    public function increaseByOne($id){
+        if($this->items[$id]){
+            $this->items[$id]['qty']++;
+            $this->items[$id]['price'] += $this->items[$id]['priceItem'];
+            $this->totalQty++;
+            $this->totalPrice += $this->items[$id]['priceItem'];
         }
     }
     //xóa nhiều
     public function removeItem($id){
-        $this->totalQty -= $this->items[$id]['qty'];
-        $this->totalPrice -= $this->items[$id]['price'];
-        unset($this->items[$id]);
+        if($this->items[$id]){
+            $this->totalQty -= $this->items[$id]['qty'];
+            $this->totalPrice -= $this->items[$id]['price'];
+            unset($this->items[$id]);
+        }
+    }
+    public function updateQty($id,$qty){
+        if($this->items[$id]){
+            $oldQty = $this->items[$id]['qty'];
+            $price = $this->items[$id]['priceItem'];
+            $this->items[$id]['qty'] = $qty;
+            $this->items[$id]['price'] = $price * $qty;
+            $this->totalQty += ($qty - $oldQty) ;
+            $this->totalPrice += ($qty - $oldQty)*$price;
+        }
     }
 }

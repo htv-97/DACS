@@ -12,8 +12,8 @@
         <div class="owl-carousel-3 show__arr">
             @foreach ($productType as $item)
                 <div class="card">
-                <img src="{{route('image',$item->image)}}" alt="">
-                <a href="{{route('productType',$item->name)}}" class="card__category">{{$item->name}}</a>
+                    <img src="{{route('image',$item->image)}}" alt="">
+                    <a href="{{route('productType',$item->name)}}" class="card__category">{{$item->name}}</a>
                 </div>
             @endforeach
 
@@ -25,18 +25,23 @@
         <div class="owl-carousel-3 show__arr">
             @foreach ($productFeature as $item)
                 <article class="card card__product">
-                    @if(!empty($item->promotion_price))
-                        <span class="sales">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
-                    @endif
-                <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                    <div class="card__img">
+                        @if(!empty($item->promotion_price))
+                            <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
+                        @endif
+                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
+                    </div>    
                     <div class="card__content">
                     <h3 class="card__title">{{$item->name}}</h3>
                         <div class="card__prices">
                             @if(!empty($item->promotion_price))
-                                <span>{{$item->promotion_price}}</span>
+                                <span class="price">{{number_format($item->promotion_price,0,',','.')}}</span>
+                                <span class="price__through">{{number_format($item->unit_price,0,',','.')}}</span>
+                            @else
+                                <span class="price">{{number_format($item->unit_price,0,',','.')}}</span>
                             @endif
-                            <span>{{$item->unit_price}}</span>
-                            <i class="icon-heart1"></i>
+                            <i class="icon-heart1" data-wishlist='add' data-id="{{$item->id}}"></i>
                         </div>
                     </div>
                 </article>
@@ -48,23 +53,28 @@
         <a href="{{route('productType','hot-trends')}}" class="see-more">Xem thêm</a>   
         <div class="owl-carousel-3 show__arr">
             @foreach ($productNew as $item)
-                
                 <article class="card card__product">
-                    @if(!empty($item->promotion_price))
-                        <span class="sales">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
-                    @endif
-                    <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                    <div class="card__img">
+                        @if(!empty($item->promotion_price))
+                            <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
+                        @endif
+                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
+                    </div>    
                     <div class="card__content">
                     <h3 class="card__title">{{$item->name}}</h3>
                         <div class="card__prices">
                             @if(!empty($item->promotion_price))
-                                <span>{{$item->promotion_price}}</span>
+                                <span class="price">{{number_format($item->promotion_price,0,',','.')}}</span>
+                                <span class="price__through">{{number_format($item->unit_price,0,',','.')}}</span>
+                            @else
+                                <span class="price">{{number_format($item->unit_price,0,',','.')}}</span>
                             @endif
-                                <span>{{$item->unit_price}}</span>
-                                <i class="icon-heart1"></i>
+                            <i class="icon-heart1" data-wishlist='add' data-id="{{$item->id}}"></i>
                         </div>
                     </div>
                 </article>
+                
             @endforeach
 
         </div>
@@ -76,14 +86,19 @@
             @foreach ($productSale as $item)
                 
                 <article class="card card__product">
-                    <span class="sales">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
-                    <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                    <div class="card__img">
+                        @if(!empty($item->promotion_price))
+                            <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
+                        @endif
+                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
+                    </div>    
                     <div class="card__content">
                     <h3 class="card__title">{{$item->name}}</h3>
                         <div class="card__prices">
-                            <span>{{$item->promotion_price}}</span>
-                            <span>{{$item->unit_price}}</span>
-                            <i class="icon-heart1"></i>
+                            <span class="price">{{$item->promotion_price}}</span>
+                            <span class="price__through">{{$item->unit_price}}</span>
+                            <i class="icon-heart1" data-wishlist='add' data-id="{{$item->id}}"></i>
                         </div>
                     </div>
                 </article>

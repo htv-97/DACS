@@ -16,4 +16,8 @@ class Product extends Model
     {
         return $this->hasMany('App\BillDetail', 'id_product', 'id');
     }
+    public function wishlist()
+    {
+        return $this->hasMany('App\Wishlist', 'id_product', 'id');
+    }
 }

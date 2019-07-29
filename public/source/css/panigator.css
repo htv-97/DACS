@@ -1,0 +1,24 @@
+ul.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+ul.pagination .page-link {
+    padding: 0 1rem;
+    background-color: #ffffff;
+    font-size: 1.2rem;
+    line-height: 3rem;
+    display: inline-block;
+}
+
+ul.pagination .active .page-link {
+    color: white;
+    background-color: #777;
+    font-weight: 600;
+    transform: scale(1.2);
+}
+a.page-link:hover {
+    background-color: #1a143e63;
+}

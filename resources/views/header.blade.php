@@ -1,5 +1,5 @@
 <header>
-    <a href="{{route('index-page')}}"><img src="{{URL::asset('./source/img/logo-lana.png')}}" alt="" class="logo__header">
+    <a href="{{route('index-page')}}"><img src="{{URL::asset('./source/image/logo/logo-lana.png')}}" alt="" class="logo__header">
     <ul>
 
         @foreach ($loai_sp as $item)

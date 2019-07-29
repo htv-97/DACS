@@ -1,0 +1,33 @@
+.wellcome-container{
+    height: 70vh;
+}
+.wellcome-title{
+    font-size: 3.8rem;
+    color: #ff6b6b;
+    line-height: 1.6;
+    font-weight: 700;   
+    text-transform: uppercase; 
+    border-right: 2px solid #ff6b6b;
+    position: relative;
+    top: 50%;  
+    width: 0;
+    padding:0 15px;
+    margin: 0 auto;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%); 
+    animation: typewriter 4s steps(44) .5s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+
+/* Animation */
+
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 90%;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color:  #ff6b6b;}
+  to{border-right-color: transparent;}
+}
