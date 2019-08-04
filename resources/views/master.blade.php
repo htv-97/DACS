@@ -9,7 +9,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ URL::asset("source/icomoon/style.css") }}">
+    <link rel="stylesheet" href="{{ URL::asset("source/icomoon/customer/style.css") }}">
     <link rel="stylesheet" href="{{ URL::asset("source/css/owl.carousel.css")}}">
     <link rel="stylesheet" href="{{ URL::asset("source/css/grid.css")}}">
     <script src="{{URL::asset('source/js/jquery.min.js')}}"></script>

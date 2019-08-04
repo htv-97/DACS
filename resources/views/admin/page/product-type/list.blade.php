@@ -22,7 +22,7 @@
             <div class="status status-pending" ajax-action='delete' data-id='{{$item->id}}'>Xóa</div>
         </form>  
     @endforeach
-    {!! $productList->links() !!}
+    {{-- {!! $productList->links() !!} --}}
 
 
 

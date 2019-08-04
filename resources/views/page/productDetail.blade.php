@@ -58,10 +58,10 @@
         </article>
     </section>
     <!-- details product -->
-    <section>
+    <section id="product-info">
         <ul class="flex">
             <li>
-                <h2 class="upp product__details--title" data-show="target" data-target="product-info">thông tin chi tiết</h2>
+                <h2 class="upp product__details--title" data-show="target" data-target="product-detail">thông tin chi tiết</h2>
             </li>
             <li>
                 <h2 class="upp product__details--title" data-show="target" data-target="product-transfer">giao hàng</h2>
@@ -71,7 +71,7 @@
             </li>
         </ul>
         <div>
-            <div class="grid product__detail--info mt-3" id="product-info">
+            <div class="grid product__detail--info mt-3" id="product-detail">
                 <h3 class="text">Miêu tả</h3>
                 <p class="text">Quần ống cao, có túi phía trước và túi may viền phía sau</p>
                 <h3 class="text">Đặc tính</h3>
@@ -124,7 +124,7 @@
                             @if(!empty($item->promotion_price))
                                 <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
                             @endif
-                            <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                            <a href="{{route('productDetail',$item->name)}}" class="link-product"><img src="{{route('image',$item->image)}}" alt=""></a>
                             <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
                         </div>    
                         <div class="card__content">

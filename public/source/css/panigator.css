@@ -6,11 +6,11 @@ ul.pagination {
 }
 
 ul.pagination .page-link {
-    padding: 0 1rem;
-    background-color: #ffffff;
+    padding: 1rem 1.5rem;
+    background-color: #eaeaea;
     font-size: 1.2rem;
-    line-height: 3rem;
     display: inline-block;
+    border: .1px solid #0001;
 }
 
 ul.pagination .active .page-link {

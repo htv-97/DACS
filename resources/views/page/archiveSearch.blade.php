@@ -21,7 +21,7 @@
                             @if(!empty($item->promotion_price))
                                 <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
                             @endif
-                            <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                            <a href="{{route('productDetail',$item->name)}}" class="link-product" ><img src="{{route('image',$item->image)}}" alt=""></a>
                             <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
                         </div>    
                         <div class="card__content">

@@ -66,13 +66,13 @@
             <div class="cart__list" id='wishlist_content'>  
                 @if (Session::has('wishlist') && $totalWish!=0)
                     @foreach ($items as $item)
-                        <div class="cart__wrapper grid mb-3">
+                        <a href="{{route('productDetail',$item['name']) }}" class="cart__wrapper grid mb-3">
                             <img src="{{route('image',$item['image'])}}" alt="">
                             
                             <div>
                                 <div class="grid__head-quick-seen mb-1">
                                     <strong>{{$item['name']}}</strong>
-                                    <i class="icon-x1" data-id='{!!$item['id']!!}' ajax-remove='wishlist'></i>
+                                    <i class="icon-x1" data-id='{!!$item['id']!!}' ajax-remove='wishlist' ></i>
                                 </div>
                                 <div class="card__prices">
                                     @if($item['isSale'])
@@ -83,7 +83,7 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 @else
                     <div class="flex-center txt-center" style="min-height:200px;line-height:1.7;">Chưa có sản phẩm nào được bạn thích!</div>

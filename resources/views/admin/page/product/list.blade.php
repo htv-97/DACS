@@ -2,6 +2,17 @@
 @section('content')
 <div class="alert" id="alert"></div>
 {{-- <input type="text" name="" id="search-keyup" placeholder="Tìm theo tên sản phẩm..."> --}}
+<ul class="nav-menu">
+    @foreach ($productType as $type)
+        @if($type->id === $currentType)
+            <li class="nav-item active"><p class="nav-link" data-id='{{$type->id}}'>{{$type->name}}</p></li>
+        @else
+            <li class="nav-item"><p class="nav-link" data-id='{{$type->id}}'>{{$type->name}}</p></li>
+        @endif
+    @endforeach
+        <li class="nav-item"><p class="nav-link" style="width:30px;height:100%"></p></li>
+
+</ul>
 <div class="data-table">
     <div class="value value-name ">
         <div><h2>Tên sản phẩm</h2></div>
@@ -9,59 +20,96 @@
         <div><h2>Loại sản phẩm</h2></div>
         <div><h2>Giá bán</h2></div>
         <div><h2>Giá khuyến mãi</h2></div>
-        <div><h2>Sửa</h2></div>
-        <div><h2>Xóa</h2></div>
+        <a href="{{route('newProduct')}}" class="icon-plus status status-success"></a>
     </div>
-    @foreach ($list as $item)
-        <form class="value" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="id" value="{{$item->id}}">
-            {{-- <input type="text" value="{{$item->name}}" ajax-id='{{$item->id}}' ajax-edit='name'> --}}
-            <input type="text" value="{{$item->name}}" name="name">
-            <div class="img-wrapper img-file">
-                <img src="{{route('image',$item->image)}}" class="thumbails" alt="">
-                <input type="file" name="image">
-            </div>
-            <select name="type" >
-                <option value="">Áo</option>
-                <option value="">Quần</option>
-                <option value="">Váy</option>
-                <option value="">Đầm</option>
-            </select>
-            <div>
-                <div class="product__quantity minus" data-type='-1'>-</div>
-                <input type="number"  name="unit-price" min="0" value="{{$item->unit_price}}" class="product__quantity">
-                <div class="product__quantity plus" data-type='1'>+</div>
-            </div>
-            <div>
-                <div class="product__quantity minus" data-type='-1'>-</div>
-                {{-- <input type="number" data-id='{!!$product['item']->id!!}' data-price='{!!$product['priceItem']!!}' name="product-quantity" min="0" value="{{$product['qty']}}" class="product__quantity"> --}}
-                <input type="number"  name="promotion" min="0" value="{{$item->promotion_price}}" class="product__quantity">
-                <div class="product__quantity plus" data-type='1'>+</div>
-            </div>
-            <button type="submit" class="status status-pending">Sửa</button>
-            <div class="status status-pending" ajax-action='delete' data-id='{{$item->id}}'>Xóa</div>
-        </form>  
-    @endforeach
-    <link rel="stylesheet" href="{{URL::asset('/source/css/panigator.css')}}">
+    <div class="data-content">
+        @foreach ($list as $item)
+            <div class="value">
+                <h3>{{$item->name}}</h3>
+                <div class="img-wrapper">
+                    <img src="{{route('image',$item->image)}}" class="thumbails" alt="">
+                    {{-- <input type="file" name="image"> --}}
+                </div>
+                @foreach ($productType as $type)
+                    @if($type->id === $item->id_type)
+                        <h3>{{$type->name}}</h3>
+                    @endif
+                @endforeach
+                <h3 class="price">{{$item->unit_price}}</h3>
+                @if($item->promotion_price !== null || $item->promotion_price != 0 )
+                <h3 class="price">{{$item->promotion_price}}</h3>
+                @else
+                <p>Không khuyến mãi</p>
+                @endif
+                <div>
+                    <a href="{{route('detailProduct',$item->id)}}" class="status status-pending">Sửa</a>
+                    <a class="status status-pending" ajax-action='delete' data-id='{{$item->id}}'>Xóa</a>
+                </div>
+            </div>  
+        @endforeach
+    </div>
+    {{-- <link rel="stylesheet" href="{{URL::asset('/source/css/panigator.css')}}">
 
-    {!! $list->links() !!}
+    {!! $list->links() !!} --}}
 
-
-
+    
 
 </div>
+<script>
+    $('document').ready(function(){
+        // load data follow type
+        $('body').on('click',`.nav-item:not(.active)`,function(e){
+            var id = $(this).children().attr('data-id');
+            var nameType = $(this).children().text();
+            console.log(nameType);
+            $('.data-content .value').toggle(200);
+            $('.data-content').append(`
+            <div class="txt-center">
+                <img src='{{URL::asset('source/image/loading.gif')}}' style='margin:20px auto; width:100px;'></img>
+            </div>            
+            `);
+            $.ajax({
+                type: "get",
+                url: `{{route('showProductType')}}`,
+                data: {'id':id},
+                dataType: "json"            
+            })
+            .done(function(res){
+                $source = `{{URL::asset('source/image/product/')}}/`;
+                $('.data-content').empty();
+                if(res.list && res.list.length !== 0){
+                    $.each(res.list, function (index, val) { 
+                        $linkConstruct = "{{route('detailProduct','__construct')}}";
+                        $link = $linkConstruct.replace('__construct',val.id);
+                        $('.data-content').append(`<div class="value">
+                                    <h3>${val.name}</h3>
+                                    <div class="img-wrapper">
+                                        <img src="${$source}${val.image}" class="thumbails" alt="">
+                                    </div>
+                                    <h3>${res.type.name}</h3>
+                                    <h3 class="price">${val.unit_price}</h3>
+                                        ${$promotion = val.promotion_price 
+                                            ? `<h3 class="price">${val.promotion_price}</h3>`
+                                            : `<p>Không khuyến mãi</p>`}
+                                    <div>
+                                        <a href='${$link}' class="status status-pending" data-id='${val.id}'>Sửa</a>
+                                        <a  class="status status-pending" ajax-action='delete' data-id='${val.id}'>Xóa</a>
+                                    </div>
+                                </div>`);
+                    });
+                }
+                else
+                $('.data-content').append(`<h2 class='alert alert-error txt-center'>Hiện tại loại hàng ${nameType} đang trống!</h2>`);
+            })
+            .fail(function(res){
+                $('.data-content').append(`<h2 class='alert alert-error'>Có lỗi! Vui lòng F5 lại trang</h2>`);
+            });
 
-       <script>
-            $(document).ready(function(){
-                // $("#search-keyup").on("keyup", function() {
-                //     var value = $(this).val().toLowerCase();
-                //     $(".card__title").filter(function() {
-                //         $(this).parent().parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                //     });
-                // });
-                $('[ajax-action="delete"]').on('click',function(){
-                    $wrapper = $('form').has($(this));
+        });
+        $('body').on('click',`[ajax-action="delete"]`,function(e){
+                    e.stopPropagation();
+                    console.log($(this));
+                    $wrapper = $('.value').has($(this));
                     $id = $(this).attr('data-id');
                     $wrapper.slideUp(200);
                     setTimeout(() => {
@@ -69,7 +117,7 @@
                     }, 210);
                     $.ajax({
                         type: "get",
-                        url: `{{route('delType')}}`,
+                        url: `{{route('delProduct')}}`,
                         data: {'id':$id},
                         dataType: "Json",
                         success: function (res) {
@@ -77,32 +125,6 @@
                         }
                     });
                 })
-                
-                $(`form.value`).on('submit',function(e){
-                    e.preventDefault();
-                    $btn = $(this).find(`[type='submit']`);
-                    $img = $(this).find('img');
-                    $.ajax({
-                        type: "POST",
-                        url: `{{route('editType')}}`,
-                        data: new FormData(this),
-                        dataType: 'json',
-                        contentType:false,
-                        cache:false,
-                        processData:false,
-                        success: function (res) {
-                            if(res.type === 'error'){
-                                alert(res.mess);
-                            }
-                            else{
-                                $btn.toggleClass('status-pending status-success');
-                                $img.attr('src',`{{URL::asset('source/image/product')}}/`+res.newImg);
-
-                            }
-                        }
-                    });
-                })
-               
-           })
-       </script>
+    })
+</script>
 @endsection

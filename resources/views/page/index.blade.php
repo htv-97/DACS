@@ -29,7 +29,7 @@
                         @if(!empty($item->promotion_price))
                             <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
                         @endif
-                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href="{{route('productDetail',$item->name)}}" class="link-product"><img src="{{route('image',$item->image)}}" alt=""></a>
                         <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
                     </div>    
                     <div class="card__content">
@@ -58,7 +58,7 @@
                         @if(!empty($item->promotion_price))
                             <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
                         @endif
-                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href="{{route('productDetail',$item->name)}}" class="link-product" ><img src="{{route('image',$item->image)}}" alt=""></a>
                         <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
                     </div>    
                     <div class="card__content">
@@ -90,7 +90,7 @@
                         @if(!empty($item->promotion_price))
                             <span class="sales-percent">{{100 - round($item->promotion_price / $item->unit_price * 100).'%'}}</span>
                         @endif
-                        <a href="{{route('productDetail',$item->name)}}"><img src="{{route('image',$item->image)}}" alt=""></a>
+                        <a href="{{route('productDetail',$item->name)}}" class="link-product"><img src="{{route('image',$item->image)}}" alt=""></a>
                         <a href='{{route('addToCart',$item->id)}}' class="quick-buy">Mua ngay</a>
                     </div>    
                     <div class="card__content">
@@ -114,7 +114,7 @@
                 
             <a href="{{route('news',$item->title)}}">
                     <article class="card card__news">
-                        <img src="{{route('image',$item->image)}}" alt="">
+                        <img src="{{route('newsImg',$item->image)}}" alt="">
                         <div class="card__content">
                         <h3 class="post__title">{{$item->title}}</h3>
                         </div>

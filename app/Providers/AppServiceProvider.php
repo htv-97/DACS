@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('header',function($menu){
-            $loai_sp = ProductType::all();
-            $menu -> with('loai_sp', $loai_sp); 
+        view()->composer(['header','admin.page.product.list','admin.page.product.detail','admin.page.product.create'],function($menu){
+            $productType = ProductType::all();
+            $menu -> with('productType', $productType); 
         });
         view()->composer(['rightSide','page.shoppingCart','page.checkout'],function($view){
             if(Session('cart')){
@@ -51,5 +51,11 @@ class AppServiceProvider extends ServiceProvider
                                 ]);
             }
         });
+
+       // admin
+        // view()->composer('admin.page.product.list', function ($view) {
+        //     $loại
+        // });
+
     }
 }

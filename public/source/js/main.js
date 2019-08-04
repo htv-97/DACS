@@ -7,49 +7,50 @@ $(document).ready(function () {
 
 
 
-    var owl = $('.owl-carousel');
-    var owl3 = $('.owl-carousel-3');
-    var arr = ['<span class="icon-arrow-left"></span>','<span class="icon-arrow-right"></span>']
-    owl.owlCarousel({
-        items: 1,
-        center:true,
-        loop: true,
-        dots:true,
-        nav: false,
-        smartSpeed: 400,
-        margin: 0,
-        autoplay: false
-        // autoplayTimeout: 1000,
-        // autoplayHoverPause: true
-    });
-    owl3.owlCarousel({
-        center:true,
-        items: 3,
-        smartSpeed: 400,
-        loop: true,
-        nav: true,
-        navText:arr,
-        dots:true,
-        margin: 50,
-        autoplay: false,
-        // autoplayTimeout: 1000,
-        // autoplayHoverPause: true,
-        responsiveClass:true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            900:{
-                items: 3
-            },
-            1500:{
-                items: 4
+        var owl = $('.owl-carousel');
+        var owl3 = $('.owl-carousel-3');
+        var arr = ['<span class="icon-arrow-left"></span>','<span class="icon-arrow-right"></span>']
+        owl.owlCarousel({
+            items: 1,
+            center:true,
+            loop: true,
+            dots:true,
+            nav: false,
+            smartSpeed: 400,
+            margin: 0,
+            autoplay: false,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true
+        });
+        owl3.owlCarousel({
+            center:true,
+            items: 3,
+            smartSpeed: 400,
+            loop: true,
+            nav: true,
+            navText:arr,
+            dots:true,
+            margin: 50,
+            autoplay: false,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true,
+            responsiveClass:true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                900:{
+                    items: 3
+                },
+                1500:{
+                    items: 4
+                }
             }
-        }
-    });
+        });
+
     var logo = $(".logo__header");
    
     $(window).scroll(function(){
@@ -59,33 +60,24 @@ $(document).ready(function () {
         else  
             logo.removeClass("active");
     })
-
-    // $('.search,.cart').hide();
-        // $(".control-search").click(function (e) { 
-        //     $('.search').toggle(400);
-        //     $('.cart').hide(400);
-        // });
-        // $('.control-cart').click(function (e) { 
-        //     $('.cart').toggle(300);    
-        //     $('.search').hide(300);    
-        // });
-    $("[data-toggle='target']").on("click",function(){
-        var target = $(this).attr('data-target');
-        $("#"+target+"").parent().children().not($("#"+target+"")).hide(300);
-        $("#"+target+"").toggle(300);
-    })
-    $("[data-show='target']").on("click",function(){
-        var target = $(this).attr('data-target');
-        $("#"+target+"").parent().children().not($("#"+target+"")).hide(300);
-        $("#"+target+"").show(300);
-    })    
-    $("[data-toggle='gparent']").click(function(){
-        $(this).parent().parent().toggle(300);
-    })
+    //show hide right side
+        $("[data-toggle='target']").on("click",function(){
+            var target = $(this).attr('data-target');
+            $("#"+target+"").parent().children().not($("#"+target+"")).hide(300);
+            $("#"+target+"").toggle(300);
+        })
+        $("[data-show='target']").on("click",function(){
+            var target = $(this).attr('data-target');
+            $("#"+target+"").parent().children().not($("#"+target+"")).hide(300);
+            $("#"+target+"").show(300);
+        })    
+        $("[data-toggle='gparent']").click(function(){
+            $(this).parent().parent().toggle(300);
+        })
 
     // card
         
-    // input increase/decrease
+    // input increase/decrease cart
         function formatNumber(num) {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         }
@@ -107,28 +99,6 @@ $(document).ready(function () {
             elm.parent().parent().find("[data-price-total]").attr('data-price-total',$totalPrice);
             elm.parent().parent().find("[data-price-total]").text(formatNumber($totalPrice));
         }
-
-
-    
-    
-        $('input[type="number"]').on('change',function(e){
-            $id = $(this).attr('data-id');
-            $price = $(this).attr('data-price');
-            updateTotalPrice($(this).val(),$price,$(this));
-            updateTotalPrices($('form').has($(this)));
-            $qty = $(this).val();
-            console.log($id,$qty);
-            $.ajax({
-                type: "get",
-                url: window.location.origin+"/DACS-laravel/public/cart/qty-cart/"+$id,
-                data: {'qty':$qty},
-                dataType: "json",
-                success: function (res) {
-                    $(`#extension-icon [data-target="cart"]`).attr('data-qty',res.totalQty);
-                }
-            });
-        })
-
         function inputUpDown(e){
             $inputNum = $(this).parent().children('input[type="number"]');
             var type = $(this).attr('data-type');
@@ -159,14 +129,42 @@ $(document).ready(function () {
                 }
             });
         }
+
+    
+    
+        $('input[type="number"]').on('change',function(e){
+            $id = $(this).attr('data-id');
+            $price = $(this).attr('data-price');
+            updateTotalPrice($(this).val(),$price,$(this));
+            updateTotalPrices($('form').has($(this)));
+            $qty = $(this).val();
+            console.log($id,$qty);
+            $.ajax({
+                type: "get",
+                url: window.location.origin+"/DACS-laravel/public/cart/qty-cart/"+$id,
+                data: {'qty':$qty},
+                dataType: "json",
+                success: function (res) {
+                    $(`#extension-icon [data-target="cart"]`).attr('data-qty',res.totalQty);
+                }
+            });
+        })
+
+
+
         $('.plus').on('click',{param : 1},inputUpDown);
         $('.minus').on('click',{param : -1},inputUpDown);
         // remover product
-        var _token = $('input[type="hidden"][name="_token"]').val();
-        $('[ajax-remove]').click(function (e) { 
+        $('body').on('click','[ajax-remove]',ajaxRemove);
+
+
+        function ajaxRemove(e) { 
+            e.preventDefault();
+            // console.log(e,this,$(this));
             var id = $(this).attr('data-id');
             var type = $(this).attr('ajax-remove'); 
             var target = $('[class^="cart__wrapper"]').has($(this));
+            console.log($(this),id,type,target);
             target.slideUp(200);
             var wrapper = $('form').has($(this));
             setTimeout(() => {
@@ -181,30 +179,28 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (res) {
                     $(`#extension-icon [data-target="${type}"]`).attr('data-qty',res.totalQty);
-                    console.log(res);
+                    var wishStorage = localStorage.getItem('wishlist');
+                    $('[data-wishlist]').each(function (index, element) {
+                        var id2 = $(this).attr('data-id');
+                        if(id2 === id)
+                            $(this).removeClass('active');            
+                    });
                 }
             });
-          
-        });
-      
+        }
         // wishlist
 
         $('[data-wishlist="add"]').on('click',function(e){
             var id = $(this).attr('data-id');
-            // console.log($(this).attr('data-wishlist'));
-            // $(this).attr('data-wishlist','remove');
             var elm = $(this);
+            var link = $('article.card').has($(this)).find('.card__img a.link-product').attr('href');
+            console.log(link);
             $.ajax({
                 type: "get",
                 url: window.location.origin+"/DACS-laravel/public/wishlist/add/"+id,
                 data: {},
                 dataType: "json",
                 success: function (res) {
-                    // if(typeof(Storage) !== 'undefined'){
-                    //     var oldWishStorage = localStorage.getItem('wishlist');
-                    //     var wishStorage = oldWishStorage ? oldWishList.split(',') : [];
-                    // }
-                    // else alert('Vui lòng nâng cấp trình duyệt để sử dụng!!')
                     elm.toggleClass('active');
                     $('#extension-icon .icon-heart1').attr('data-qty',res.totalQty);
                     var data = res.items;
@@ -213,12 +209,12 @@ $(document).ready(function () {
                     for(let i in data){
                         wishStorage.push(data[i].id);
                         var first = `
-                        <div class="cart__wrapper grid mb-3">
+                        <a class="cart__wrapper grid mb-3" href="${link}">
                             <img src="http://localhost/DACS-laravel/public/source/image/product/${data[i].image}" alt="">
                             <div>
                                 <div class="grid__head-quick-seen">
                                     <strong>${data[i].name}</strong>
-                                    <i class="icon-x1" data-id="${data[i].id}"></i>
+                                    <i class="icon-x1" data-id="${data[i].id}" ajax-remove="wishlist"></i>
                                 </div>
                                 <div class="card__prices">`;
                         
@@ -228,7 +224,7 @@ $(document).ready(function () {
                                     :`<span class='price'>${formatNumber(data[i].unit_price)}</span>`                                
                         var end = `</div>
                             </div>
-                        </div>`;
+                        </a>`;
                         var product = `${first} ${price} ${end}`;   
                         $('#wishlist #wishlist_content').append(product);
                     };
@@ -236,14 +232,6 @@ $(document).ready(function () {
                 }
             });
         })
-    // if(typeof(Storage) !== null){
-    //     var wishStorage = localStorage.getItem('wishlist');
-    //     $('[data-wishlist]').each(function (index, element) {
-    //         var id = $(this).attr('data-id');
-    //         if(wishStorage.indexOf(id) > -1)
-    //             $(this).addClass('active');            
-    //     });
-    // }
     $('[remove-storage]').on('click',function(){
         var keyStorage = $(this).attr('remove-storage');
         localStorage.removeItem(keyStorage);

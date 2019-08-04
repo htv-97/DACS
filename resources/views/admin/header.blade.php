@@ -8,8 +8,8 @@
                 </svg>
             </div>
             <div class="folder">
-                <span class="inner">Folder</span><span class="separator">/</span>
-                <span class="current">Dash board</span>
+                <span class="inner">Lanalala</span><span class="separator">/</span>
+                {{-- <span class="current">Dash board</span> --}}
             </div>
         </div>
         <div class="head-right d-flex align-center">

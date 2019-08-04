@@ -1,7 +1,10 @@
 <?php
-Route::get('source/image/product/{image}',[
-    'as' => 'image'
-]);
+Route::group(['prefix' => 'source/image'], function () {
+    Route::get('product/{image}',['as' => 'image']);
+    Route::get('slide/{image}',['as'=>'slideImg']);
+    Route::get('news/{image}',['as'=>'newsImg']);
+});
+
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/',[
@@ -74,12 +77,28 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::group(['prefix' => 'product'], function () {
         Route::get('show',['as'=>'showProduct','uses'=>'AdminProductController@showList']);
-        // Route::post('edit', ['as'=>'editType','uses'=>'AdminTypeController@postEdit']);
-        // Route::get('del', ['as'=>'delType','uses'=>'AdminTypeController@getDel']);
-        // Route::get('createPage', function () {
-        //     return view('admin.page.product-type.add');
-        // })->name('createPage');
-        // Route::post('create', ['as'=>'createType','uses'=>'AdminTypeController@getCreate']);    
+        Route::get('type',['as'=>'showProductType','uses'=>'AdminProductController@showListType']);
+        Route::get('detail/{id}', ['as'=>'detailProduct','uses'=>'AdminProductController@getDetail']);
+        Route::post('edit', ['as'=>'editProduct','uses'=>'AdminProductController@postEdit']);
+        Route::get('new', ['as'=>'newProduct','uses'=>'AdminProductController@getNew']);
+        Route::get('del', ['as'=>'delProduct','uses'=>'AdminProductController@getDel']);
+
     });
+    Route::group(['prefix' => 'slide'], function () {
+        Route::get('show',['as'=>'showSlide','uses'=>'AdminSlideController@showSlide']);
+        Route::post('edit', ['as'=>'editSlide','uses'=>'AdminSlideController@postEdit']);
+        Route::get('del', ['as'=>'delSlide','uses'=>'AdminSlideController@getDel']);
+    });
+    Route::group(['prefix' => 'news'], function () {
+        Route::get('show',['as'=>'showNews','uses'=>'AdminNewsController@showNews']);
+        Route::post('edit', ['as'=>'editNews','uses'=>'AdminNewsController@postEdit']);
+        Route::get('del', ['as'=>'delNews','uses'=>'AdminNewsController@getDel']);
+    });    
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('show',['as'=>'showAccout','uses'=>'AdminAccountController@showAccount']);
+        Route::post('edit', ['as'=>'editAccount','uses'=>'AdminAccountController@postEdit']);
+        Route::post('create', ['as'=>'createAccount','uses'=>'AdminAccountController@postCreate']);
+        Route::get('del', ['as'=>'delAccount','uses'=>'AdminAccountController@getDel']);
+    });     
 });
 

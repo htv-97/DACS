@@ -1,0 +1,216 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?7auur1');
+  src:  url('fonts/icomoon.eot?7auur1#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?7auur1') format('truetype'),
+    url('fonts/icomoon.woff?7auur1') format('woff'),
+    url('fonts/icomoon.svg?7auur1#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:hover, [class*=" icon-"]:hover{
+  color:#000;
+}
+[class^="icon-"], [class*=" icon-"] {
+  cursor: pointer;
+  display: inline-block;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-facebook:before {
+  content: "\e913";
+}
+.icon-facebook-f:before {
+  content: "\e913";
+}
+.icon-instagram:before {
+  content: "\e914";
+}
+.icon-x:before {
+  content: "\e90f";
+}
+.icon-cancel:before {
+  content: "\e90f";
+}
+.icon-close:before {
+  content: "\e90f";
+}
+.icon-redo:before {
+  content: "\e900";
+}
+.icon-right:before {
+  content: "\e900";
+}
+.icon-arrow-right:before {
+  content: "\e900";
+}
+.icon-undo:before {
+  content: "\e901";
+}
+.icon-left:before {
+  content: "\e901";
+}
+.icon-arrow-left:before {
+  content: "\e901";
+}
+.icon-circle-left:before {
+  content: "\e902";
+}
+.icon-left1:before {
+  content: "\e902";
+}
+.icon-circle-previous:before {
+  content: "\e902";
+}
+.icon-arrow:before {
+  content: "\e902";
+}
+.icon-circle-down:before {
+  content: "\e903";
+}
+.icon-down:before {
+  content: "\e903";
+}
+.icon-circle-bottom:before {
+  content: "\e903";
+}
+.icon-arrow1:before {
+  content: "\e903";
+}
+.icon-circle-right:before {
+  content: "\e904";
+}
+.icon-right1:before {
+  content: "\e904";
+}
+.icon-circle-next:before {
+  content: "\e904";
+}
+.icon-arrow2:before {
+  content: "\e904";
+}
+.icon-circle-up:before {
+  content: "\e905";
+}
+.icon-up:before {
+  content: "\e905";
+}
+.icon-circle-top:before {
+  content: "\e905";
+}
+.icon-arrow3:before {
+  content: "\e905";
+}
+.icon-cart:before {
+  content: "\e906";
+}
+.icon-shopping:before {
+  content: "\e906";
+}
+.icon-ecommerce:before {
+  content: "\e906";
+}
+.icon-buy:before {
+  content: "\e906";
+}
+.icon-purchase:before {
+  content: "\e906";
+}
+.icon-heart:before {
+  content: "\e907";
+}
+.icon-love:before {
+  content: "\e907";
+}
+.icon-favorite:before {
+  content: "\e907";
+}
+.icon-like:before {
+  content: "\e907";
+}
+.icon-x1:before {
+  content: "\e910";
+}
+.icon-volume-x:before {
+  content: "\e911";
+}
+.icon-user-x:before {
+  content: "\e912";
+}
+.icon-profile-female:before {
+  content: "\e908";
+}
+.icon-female:before {
+  content: "\e908";
+}
+.icon-woman:before {
+  content: "\e908";
+}
+.icon-user:before {
+  content: "\e908";
+}
+.icon-profile:before {
+  content: "\e908";
+}
+.icon-avatar:before {
+  content: "\e908";
+}
+.icon-profile-male:before {
+  content: "\e909";
+}
+.icon-persona:before {
+  content: "\e909";
+}
+.icon-profile2:before {
+  content: "\e909";
+}
+.icon-male:before {
+  content: "\e909";
+}
+.icon-user2:before {
+  content: "\e909";
+}
+.icon-avatar2:before {
+  content: "\e909";
+}
+.icon-user1:before {
+  content: "\e90a";
+}
+.icon-profile1:before {
+  content: "\e90a";
+}
+.icon-avatar1:before {
+  content: "\e90a";
+}
+.icon-heart1:before {
+  content: "\e90b";
+}
+.icon-love1:before {
+  content: "\e90b";
+}
+.icon-like1:before {
+  content: "\e90b";
+}
+.icon-search-minus:before {
+  content: "\e90c";
+}
+.icon-search-plus:before {
+  content: "\e90d";
+}
+.icon-search{
+  font-size: 24px;
+}
+.icon-search:before {
+  content: "\e90e";
+}

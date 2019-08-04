@@ -10,7 +10,7 @@ class AdminTypeController extends Controller
 {
     // productType
     public function showList(){
-        $list = ProductType::orderBy('id','desc')->paginate(10);
+        $list = ProductType::orderBy('id','desc')->get();
         return view('admin.page.product-type.list',compact('list'));
     }
     public function postEdit(Request $res){
@@ -40,9 +40,11 @@ class AdminTypeController extends Controller
         else{
             $newName = $type->image;
         }
+        FILE::delete('source/image/product/'.$type->image);
         $type->image = $newName;
         $type->name = $res->name;
         $type->save();
+        
         return response()->json(['mess'=>'uploaded','type'=>'success',
                                 'newImg'=>$newName]);
        

@@ -40,7 +40,7 @@
                 @endif
             </div>
             <div class="cart__wrapper grid">
-                <button type='submit' class="btn upp btn-update">CẬP NHẬT</button>
+                <a href='{{route('delSession','cart')}}' type='submit' class="btn upp btn-update">Xóa giỏ hàng</a>
                 <a href="{{route('checkout')}}" class="btn upp btn-checkout">THANH TOÁN</a>
             </div>
         </form>

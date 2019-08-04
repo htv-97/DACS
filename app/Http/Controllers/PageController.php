@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Http\Response;
 // use Illuminate\Routing\ResponseFactory;
 use Response;
@@ -51,9 +51,10 @@ class PageController extends Controller
                 return view('page.archive',compact('productList','productType'));
                 break;                
             default:
-                $productTypeId = ProductType::where('name','like',$productType)->firstOrFail()->id;
-                $productList = Product::where('id_type','=',$productTypeId)->paginate(9);
-                return view('page.archive',compact('productList','productType'));
+                $type = ProductType::where('name','like',$productType)->firstOrFail();
+                $typeImg = $type->image;
+                $productList = Product::where('id_type','=',$type->id)->paginate(9);
+                return view('page.archive',compact('productList','productType','typeImg'));
                 break;
         }
         
