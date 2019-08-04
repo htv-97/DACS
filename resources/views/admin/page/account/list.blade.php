@@ -21,7 +21,7 @@
         <h2 class="span_2">Email</h2>
         <h2>Mật khẩu</h2>
         <h2>Quyền admin</h2>
-        <div role="open-popup" for='popup-create' title='Thêm mới' class="icon-plus status status-success"></div>
+        <a role="open-popup" for='popup-create' title='Thêm mới' class="icon-plus status status-success"></a>
     </div>
     @foreach ($users as $item)
         <form class="value" method="Post" enctype="multipart/form-data">

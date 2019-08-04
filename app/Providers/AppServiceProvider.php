@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if(env('REDIRECT_HTTPS')){
+            $this->app['request']->server->set('HTTPS',true);
+        }
     }
 
     /**
@@ -26,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(env('REDIRECT_HTTPS')){
+            $url->formatScheme('https');
+        }
         view()->composer(['header','admin.page.product.list','admin.page.product.detail','admin.page.product.create'],function($menu){
             $productType = ProductType::all();
             $menu -> with('productType', $productType); 
