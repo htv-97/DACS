@@ -7,7 +7,7 @@
             <strong>{{Session::get('signupAlert')}}</strong>
         </div>
         @elseif($errors->any())
-        <div class="alert bg-error flex-center txt-center">
+          <div class="alert bg-error flex-center txt-center">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li class="size-14 c-red">{{ $error }}</li>
@@ -15,7 +15,9 @@
                     @endforeach
                 </ul>
             </div>
-            
+        @elseif(Session::has('errorAdminLogin'))
+            <h3 class="alert bg-error flex-center txt-center">{{Session::get('message')}}</h3>
+  
         @endif
         <article class="user">
         
@@ -46,48 +48,52 @@
                 </div>
                 
                 <div class="user_options-forms" id="user_options-forms">
-                    <div class="user_forms-login">
-                    <h2 class="forms_title">Đăng nhập</h2>
-                    <form class="forms_form" method="post" action="{{route('login')}}">
-                        @csrf
-                        <fieldset class="forms_fieldset">
-                        <div class="forms_field">
-                            <input type="email" name="email" placeholder="Email" class="forms_field-input" required autofocus />
-                        </div>
-                        <div class="forms_field">
-                            <input type="password" name="pass" placeholder="Mật khẩu" class="forms_field-input" required />
-                        </div>
-                        </fieldset>
-                        <div class="forms_buttons">
-                            <button type="button" class="forms_buttons-forgot">Quên mật khẩu</button>
-                            <input type="submit" value="Đăng nhập" class="forms_buttons-action">
-                        </div>
-                    </form>
+                    <div class="user_forms-login" style="text-align:center">
+                        @if(Auth::check())
+                            <img src="{{URL::asset('source/image/avatar/tam.jpg')}}"  style='height:300px;width:auto !important;'alt="">
+                        @else
+                            <h2 class="forms_title">Đăng nhập</h2>
+                            <form class="forms_form" method="post" action="{{route('login')}}">
+                                @csrf
+                                <fieldset class="forms_fieldset">
+                                <div class="forms_field">
+                                    <input type="email" name="email" placeholder="Email" class="forms_field-input" required autofocus />
+                                </div>
+                                <div class="forms_field">
+                                    <input type="password" name="pass" placeholder="Mật khẩu" class="forms_field-input" required />
+                                </div>
+                                </fieldset>
+                                <div class="forms_buttons">
+                                    <button type="button" class="forms_buttons-forgot">Quên mật khẩu</button>
+                                    <input type="submit" value="Đăng nhập" class="forms_buttons-action">
+                                </div>
+                            </form>
+                        @endif
                     </div>
                     <div class="user_forms-signup">
-                    <h2 class="forms_title">Đăng ký</h2>
-                    <form class="forms_form" method="post" action="{{route('signup')}}">
-                        @csrf
-                        <fieldset class="forms_fieldset">
-                        <div class="forms_field">
-                            <input type="text" name='username' placeholder="Họ và tên" class="forms_field-input" required />
-                        </div>
-                        <div class="forms_field">
-                            <input type="email" name='email' placeholder="Email" class="forms_field-input" required />
-                        </div>
-                        <div class="forms_field">
-                            <input type="password" name='pass' placeholder="Mật khẩu" class="forms_field-input" required />
-                        </div>
-                        <div class="forms_field">
-                            <label><input type="radio" name="gender" value='male' checked>Nam</label>
-                            <label><input type="radio" name="gender" value='female'>Nữ</label>
-                        </div>
-            
-                        </fieldset>
-                        <div class="forms_buttons">
-                        <input type="submit" value="Đăng ký" class="forms_buttons-action">
-                        </div>
-                    </form>
+                        <h2 class="forms_title">Đăng ký</h2>
+                        <form class="forms_form" method="post" action="{{route('signup')}}">
+                            @csrf
+                            <fieldset class="forms_fieldset">
+                            <div class="forms_field">
+                                <input type="text" name='username' placeholder="Họ và tên" class="forms_field-input" required />
+                            </div>
+                            <div class="forms_field">
+                                <input type="email" name='email' placeholder="Email" class="forms_field-input" required />
+                            </div>
+                            <div class="forms_field">
+                                <input type="password" name='pass' placeholder="Mật khẩu" class="forms_field-input" required />
+                            </div>
+                            <div class="forms_field">
+                                <label><input type="radio" name="gender" value='male' checked>Nam</label>
+                                <label><input type="radio" name="gender" value='female'>Nữ</label>
+                            </div>
+                
+                            </fieldset>
+                            <div class="forms_buttons">
+                            <input type="submit" value="Đăng ký" class="forms_buttons-action">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

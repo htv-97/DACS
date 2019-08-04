@@ -61,7 +61,7 @@ Route::group(['prefix' => '/'], function () {
     });
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'adminLogin'], function () {
     Route::get('/',function () {
         return view('admin.page.index');
     })->name('index-admin');

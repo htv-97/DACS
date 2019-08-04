@@ -34,7 +34,7 @@
                 </a>
                 <ul class="menu-drop-col">
                     <li><a href="{{route("showProduct")}}">Danh sách sản phẩm</a></li>
-                    <li><a href="#">Thêm sản phẩm</a></li>
+                    <li><a href="{{route('newProduct')}}">Thêm sản phẩm</a></li>
                 </ul>
             </li>
             <li>
